@@ -23,9 +23,9 @@ namespace DeckOfCards {
             return temp;
         }
 
-        public void dealerLogic(List<Card> dealercard){
+        public void dealerLogic(){
 
-                int value = HandValue(dealercard);
+                int value = HandValue();
 
                 if(value < 16){
                     
@@ -33,10 +33,10 @@ namespace DeckOfCards {
                 }
         }
 
-          public int HandValue(List<Card> card){
+          public int HandValue(){
             
             int value =0;
-             foreach(Card val in card){
+             foreach(Card val in hand){
                  if(val.val > 10 ){
                     value += 10;
                  }
