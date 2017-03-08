@@ -3,13 +3,13 @@ using System.Collections.Generic;
 namespace DeckOfCards {
     public class Player {
         public string name;
-        private List<Card> hand;
+        public List<Card> hand;
         public BlackJack dealer  = new BlackJack();
 
-        public int chiptotal;
+        public int chipTotal;
 
         public Player(string n = "Player") {
-        chiptotal = 250;
+            chipTotal = 250;
             hand = new List<Card>();
             name = n;
         }
@@ -29,7 +29,7 @@ namespace DeckOfCards {
                 
                 while(value < 16){
                     
-                    dealer.hit(this, currentDeck);
+                    dealer.hit(this);
                     value = this.handValue();
                 }
         }
