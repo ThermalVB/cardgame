@@ -100,11 +100,11 @@ namespace DeckOfCards
                     }
                     if (move == "hit")
                     {
-                        returner = logic.hit(player, myDeck);
+                        returner = logic.hit(player);
                     }
                     else if (move == "stay")
                     {
-                        returner = logic.stay(myDealer, player, myDeck);
+                        returner = logic.stay();
 
                     }
                 }
