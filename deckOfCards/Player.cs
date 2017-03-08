@@ -30,7 +30,7 @@ namespace DeckOfCards {
                 
                 while(value < 16){
                     
-                    blackJacker.hit(this, currentDeck);
+                    blackJacker.hit(this);
                     value = this.handValue();
                 }
         }
