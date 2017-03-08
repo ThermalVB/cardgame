@@ -33,6 +33,7 @@ namespace DeckOfCards
             dealer.dealerLogic(deck);
             deck.Reset();
             deck.Shuffle();
+
             if (dealer.handValue() == 21 || (dealer.handValue() > player.handValue())){
                 return "dealerWin";
             }
