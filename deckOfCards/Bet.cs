@@ -2,19 +2,22 @@ using System;
 
 namespace DeckOfCards {
     public class Bet {
-        private object player, currentPot;
-        private int betAmt;
+        private Player player;
+        private Pot currentPot;
     
-        public Bet(object player, int betAmt, object currentPot) {
+        public Bet(Player player, Pot currentPot) {
             this.player = player;
             this.currentPot = currentPot;
-            this.betAmt = betAmt;
         } 
-        public void wager(object player, int betAmt, object currentPot) {
-            if (player is Player)
-                ((player)player).chipTotal -= betAmt;
-            if (currentPot is Pot)
-                ((Pot)currentPot).add(betAmt);    
+
+        public string wager(int betAmt) {
+            string thisWager = "";
+            player.chipTotal -= betAmt;
+            thisWager += String.Format("Player {0}: Wagered {1} chips.\n", player.name, betAmt);
+            currentPot.add(betAmt);
+            thisWager += String.Format("Pot total: {0}", currentPot.total);
+            return thisWager;
+        
         }       
     }
 
@@ -29,13 +32,16 @@ namespace DeckOfCards {
             total += bet;
         }
 
-        public void credit(object player) {
-            if (player is Player) { 
-                player.chipTotal += total;
-                total = 0;
-            }
-            else 
-                Console.WriteLine("Invalid player, pot will be held!");
+        public String credit(Player player) { 
+            player.chipTotal += total;
+            string retString = String.Format("Crediting {0} {1} chips!", player.name, total);
+            total = 0;
+            return retString;
+        }
+            
+
+        public String getTotal() {
+            return Convert.ToString(this.total);
         }
     }
 }
