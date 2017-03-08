@@ -11,7 +11,11 @@ namespace DeckOfCards
                 player.DrawFrom(deck);
                 dealer.DrawFrom(deck);
             }
+<<<<<<< HEAD
             if (player.HandValue() == 21){
+=======
+            if (player.handValue() == 21){
+>>>>>>> 4d3da4bec1a680bca8ebe0537bfd024b8072710a
                 return "playerWin";
             }
             // if (dealer.upcard == "Ace"){
@@ -21,10 +25,17 @@ namespace DeckOfCards
         }
         public string hit(Player player,Deck deck){
             player.DrawFrom(deck);
+<<<<<<< HEAD
             if (player.HandValue() == 21){
                 return "playerWin";
             }
             if (player.HandValue() > 21){
+=======
+            if (player.handValue() == 21){
+                return "playerWin";
+            }
+            if (player.handValue() > 21){
+>>>>>>> 4d3da4bec1a680bca8ebe0537bfd024b8072710a
                 return "playerBust";
             }
             return "continue";
@@ -33,10 +44,17 @@ namespace DeckOfCards
             dealer.dealerLogic();
             deck.Reset();
             deck.Shuffle();
+<<<<<<< HEAD
             if (dealer.HandValue() == 21 || (dealer.HandValue() > player.HandValue())){
                 return "dealerWin";
             }
             if (dealer.HandValue() > 21){
+=======
+            if (dealer.handValue() == 21 || (dealer.handValue > player.handvalue())){
+                return "dealerWin";
+            }
+            if (dealer.handValue() > 21){
+>>>>>>> 4d3da4bec1a680bca8ebe0537bfd024b8072710a
                 return "dealerBust";
             }
             return "playerWin";

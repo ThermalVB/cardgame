@@ -3,7 +3,12 @@ using System.Collections.Generic;
 namespace DeckOfCards {
     public class Player {
         public string name;
+<<<<<<< HEAD
         public List<Card> hand;
+=======
+        private List<Card> hand;
+        public BlackJack dealer  = new BlackJack();
+>>>>>>> 4d3da4bec1a680bca8ebe0537bfd024b8072710a
 
         public int chipTotal;
 
@@ -22,6 +27,7 @@ namespace DeckOfCards {
             hand.RemoveAt(idx);
             return temp;
         }
+<<<<<<< HEAD
 
         public void dealerLogic(){
 
@@ -35,6 +41,19 @@ namespace DeckOfCards {
 
           public int HandValue(){
             
+=======
+        // this method will make sure score will greater than 16,
+        public void dealerLogic(Deck currentDeck){
+                int value = this.handValue();
+                
+                while(value < 16){
+                    
+                    dealer.hit(this, currentDeck);
+                    value = this.handValue();
+                }
+        }
+          public int handValue(){
+>>>>>>> 4d3da4bec1a680bca8ebe0537bfd024b8072710a
             int value =0;
              foreach(Card val in hand){
                  if(val.val > 10 ){
@@ -45,9 +64,13 @@ namespace DeckOfCards {
                  }
            }
             return (int)value;
-        }
-        
+        }//end of handValue
 
-          
-    }
+
+        public void discardAll(){      
+           while(this.hand.Count > 0){
+               Discard(0);
+           }
+        }
+    }//end of player class
 }
