@@ -5,7 +5,7 @@ namespace DeckOfCards {
         public string name;
         private List<Card> hand;
 
-        public Player(string n) {
+        public Player(string n = "Player") {
             hand = new List<Card>();
             name = n;
         }

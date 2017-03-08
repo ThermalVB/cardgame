@@ -6,9 +6,8 @@ namespace DeckOfCards
     {
         public static void Main(string[] args)
         {
-            Deck myDeck = new Deck();
-            Player tester = new Player();
-            Console.WriteLine(myDeck);
+            Ui myUi = new Ui();
+
         }
     }
 }
