@@ -4,6 +4,7 @@ namespace DeckOfCards {
     public class Player {
         public string name;
         private List<Card> hand;
+        public BlackJack dealer  = new BlackJack();
 
         public int chiptotal;
 
@@ -22,21 +23,19 @@ namespace DeckOfCards {
             hand.RemoveAt(idx);
             return temp;
         }
-
-        public void dealerLogic(List<Card> dealercard){
-
-                int value = HandValue(dealercard);
-
-                if(value < 16){
+        // this method will make sure score will greater than 16,
+        public void dealerLogic(Deck currentDeck){
+                int value = this.handValue();
+                
+                while(value < 16){
                     
-                      BlackJack.hit();
+                    dealer.hit(this, currentDeck);
+                    value = this.handValue();
                 }
         }
-
-          public int HandValue(List<Card> card){
-            
+          public int handValue(){
             int value =0;
-             foreach(Card val in card){
+             foreach(Card val in hand){
                  if(val.val > 10 ){
                     value += 10;
                  }
@@ -45,9 +44,13 @@ namespace DeckOfCards {
                  }
            }
             return (int)value;
-        }
-        
+        }//end of handValue
 
-          
-    }
+
+        public void discardAll(){      
+           while(this.hand.Count > 0){
+               Discard(0);
+           }
+        }
+    }//end of player class
 }
