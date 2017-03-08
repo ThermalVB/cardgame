@@ -7,7 +7,6 @@ namespace DeckOfCards
         public static void Main(string[] args)
         {
             Ui myUi = new Ui();
-
         }
     }
 }
