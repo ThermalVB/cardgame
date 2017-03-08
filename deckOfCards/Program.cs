@@ -7,8 +7,11 @@ namespace DeckOfCards
         public static void Main(string[] args)
         {
             Deck myDeck = new Deck();
-            Player tester = new Player();
+            Player tester = new Player("Tam");
             Console.WriteLine(myDeck);
+
+
+            
         }
     }
 }
