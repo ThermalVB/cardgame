@@ -3,7 +3,7 @@ using System.Collections.Generic;
 namespace DeckOfCards {
     public class Player {
         public string name;
-        private List<Card> hand;
+        public List<Card> hand;
 
         public int chipTotal;
 
@@ -29,7 +29,7 @@ namespace DeckOfCards {
 
                 if(value < 16){
                     
-                      BlackJack.hit();
+                    //   BlackJack.hit();
                 }
         }
 
