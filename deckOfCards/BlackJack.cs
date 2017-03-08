@@ -20,7 +20,7 @@ namespace DeckOfCards
             return "continue";
         }
         public string hit(Player player,Deck deck){
-            player.DrawFrom(deck)
+            player.DrawFrom(deck);
             if (player.handValue == 21){
                 return "playerWin";
             }
