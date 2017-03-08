@@ -30,10 +30,10 @@ namespace DeckOfCards
             return "continue";
         }
         public string stay(Player dealer,Player player,Deck deck){
-            dealer.dealerLogic();
+            dealer.dealerLogic(deck);
             deck.Reset();
             deck.Shuffle();
-            if (dealer.handValue() == 21 || (dealer.handValue > player.handvalue())){
+            if (dealer.handValue() == 21 || (dealer.handValue() > player.handValue())){
                 return "dealerWin";
             }
             if (dealer.handValue() > 21){
