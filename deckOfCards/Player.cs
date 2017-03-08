@@ -20,17 +20,14 @@ namespace DeckOfCards {
             return temp;
         }
 
-        public void Dealer(List<Card> dealercard){
+        public void dealerLogic(List<Card> dealercard){
 
                 int value = HandValue(dealercard);
 
-                if(value < 15){
+                if(value < 16){
                     
+                      BlackJack.hit();
                 }
-
-           
-
-
         }
 
           public int HandValue(List<Card> card){
