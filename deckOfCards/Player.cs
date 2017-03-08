@@ -1,16 +1,15 @@
 using System.Collections.Generic;
 
 namespace DeckOfCards {
-
-    
     public class Player {
         public string name;
-        public List<Card> hand;
-        public BlackJack blackJacker = new BlackJack();
-        public int chipTotal;
+        private List<Card> hand;
+        public BlackJack dealer  = new BlackJack();
+
+        public int chiptotal;
 
         public Player(string n = "Player") {
-        chipTotal = 250;
+        chiptotal = 250;
             hand = new List<Card>();
             name = n;
         }
@@ -30,7 +29,7 @@ namespace DeckOfCards {
                 
                 while(value < 16){
                     
-                    blackJacker.hit(this);
+                    dealer.hit(this, currentDeck);
                     value = this.handValue();
                 }
         }
@@ -46,8 +45,6 @@ namespace DeckOfCards {
            }
             return (int)value;
         }//end of handValue
-
-
         public void discardAll(){      
            while(this.hand.Count > 0){
                Discard(0);

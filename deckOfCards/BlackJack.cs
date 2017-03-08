@@ -1,26 +1,17 @@
 namespace DeckOfCards
 {
     public class BlackJack {
-        
-        public Player myPlayer { get; set; }
-        public Player myDealer { get; set; }
-        public Deck myDeck { get; set; }
 
         public int deckCount = 0;
 
         public string startGame(Player player,Player dealer,Deck deck){
 
-            
-            myPlayer = player; 
-            myDealer = dealer; 
-            myDeck = deck;
-
             for (int i = 0; i < 2; i++)
             {
-                myPlayer.DrawFrom(deck);
-                myDealer.DrawFrom(deck);
+                player.DrawFrom(deck);
+                dealer.DrawFrom(deck);
             }
-            if (myPlayer.handValue() == 21){
+            if (player.handValue == 21){
                 return "playerWin";
             }
             // if (dealer.upcard == "Ace"){
@@ -28,16 +19,17 @@ namespace DeckOfCards
             // }
             return "continue";
         }
-        public string hit(Player playerTemp){
-            playerTemp.DrawFrom(myDeck);
-            if (playerTemp.handValue() == 21){
+        public string hit(Player player,Deck deck){
+            player.DrawFrom(deck)
+            if (player.handValue == 21){
                 return "playerWin";
             }
-            if (playerTemp.handValue() > 21){
+            if (player.handValue > 21){
                 return "playerBust";
             }
             return "continue";
         }
+
         public string stay(){
             myDealer.dealerLogic(myDeck);
             myDeck.Reset();
@@ -45,7 +37,7 @@ namespace DeckOfCards
             if (myDealer.handValue() == 21 || (myDealer.handValue() > myPlayer.handValue())){
                 return "dealerWin";
             }
-            if (myDealer.handValue() > 21){
+            if (dealer.handValue > 21){
                 return "dealerBust";
             }
             return "playerWin";
