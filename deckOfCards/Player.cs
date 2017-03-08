@@ -45,8 +45,6 @@ namespace DeckOfCards {
            }
             return (int)value;
         }//end of handValue
-
-
         public void discardAll(){      
            while(this.hand.Count > 0){
                Discard(0);
