@@ -5,10 +5,10 @@ namespace DeckOfCards {
         public string name;
         private List<Card> hand;
 
-        public int chiptotal;
+        public int chipTotal;
 
         public Player(string n = "Player") {
-        chiptotal = 250;
+        chipTotal = 250;
             hand = new List<Card>();
             name = n;
         }
