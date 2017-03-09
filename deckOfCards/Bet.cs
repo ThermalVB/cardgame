@@ -12,11 +12,17 @@ namespace DeckOfCards {
 
         public string wager(int betAmt) {
             string thisWager = "";
-            player.chipTotal -= betAmt;
-            thisWager += String.Format("Player {0}: Wagered {1} chips.\n", player.name, betAmt);
+            if(player.chipTotal > betAmt)
+                player.chipTotal -= betAmt;
+            else { 
+                betAmt = player.chipTotal;
+                player.chipTotal = 0;
+            }
+            thisWager += String.Format("Player {0}: Wagered {1} chips.", player.name, betAmt);
             currentPot.add(betAmt);
-            thisWager += String.Format("Pot total: {0}", currentPot.total);
+            thisWager += String.Format(" Pot total: {0}", currentPot.total);
             return thisWager;
+            
         
         }       
     }

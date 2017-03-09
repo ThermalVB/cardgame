@@ -10,6 +10,7 @@ namespace DeckOfCards
         BlackJack logic;
         Player myPlayer;
 
+        Pot thisPot = new Pot();
         List<Player> playerList = new List<Player>();
         Player myDealer = new Player("The Dealer");
         string move;
@@ -32,7 +33,22 @@ namespace DeckOfCards
             myPlayer = new Player(typing.User_Input("Name"));
             playerList.Add(myPlayer);
             myDeck.Shuffle();
+            typing.TopLine();
+            typing.BlankLine();
+            typing.CreateLine("Enter how much you would like to bet: ");
+            typing.BlankLine();
+            typing.CenterLine(String.Format("(You have {0} chips.)", myPlayer.chipTotal));
+            typing.BlankLine();
+            typing.BottomLine();
+            Bet play1Bet = new Bet(myPlayer, thisPot);
+            int betAmt = Convert.ToInt32(typing.User_Input("Bet"));
+            typing.TopLine();
+            typing.BlankLine();
+            typing.CenterLine(play1Bet.wager(betAmt));
+            typing.BlankLine();
+            typing.BottomLine();
             logic = new BlackJack(myPlayer, myDealer, myDeck);
+
 
             if (logic.startGame(myPlayer, myDealer, myDeck) == "playerWin")
             {
@@ -53,6 +69,8 @@ namespace DeckOfCards
                 typing.CenterLine("Congratulations!");
                 typing.BlankLine(2);
                 typing.CenterLine("You won!");
+                typing.CenterLine(thisPot.credit(playerList[0]));
+                typing.BlankLine();
             }
             else if (endCondition == "playerBust")
             {
@@ -108,7 +126,6 @@ namespace DeckOfCards
             {
                 do
                 {
-
                     typing.TopLine();
                     typing.BlankLine();
                     typing.CenterLine("Your Turn:");
