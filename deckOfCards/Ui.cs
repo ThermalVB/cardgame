@@ -35,57 +35,60 @@ namespace DeckOfCards
             // Add player logic
             myPlayer = new Player(typing.User_Input("Name"));
             playerList.Add(myPlayer);
-            // Shuffle deck
-            myDeck.Shuffle();
-            // clear Console
-            Console.Clear();
-            // Prompt for bet Amount
-            typing.TopLine();
-            typing.BlankLine();
-            typing.CreateLine("Enter how much you would like to bet: ");
-            typing.BlankLine();
-            typing.CenterLine(String.Format("(You have {0} chips.)", myPlayer.chipTotal));
-            typing.BlankLine();
-            typing.BottomLine();
-            // Declare Bet objects that manage bets
-            Bet play1Bet = new Bet(myPlayer, thisPot);
-            Bet dealerBet = new Bet(myDealer, thisPot);
-            // Recieve bet amount and verify it is an integer
-            int betAmt = 0;
-            Console.Write("Please enter the number of chips you'd like to bet: ");
-            while(!int.TryParse(Console.ReadLine(), out betAmt)) {
-                Console.WriteLine("\t Input must be a valid integer");
+            do
+            {
+                // Shuffle deck
+                myDeck.Shuffle();
+                // clear Console
+                Console.Clear();
+                // Prompt for bet Amount
+                typing.TopLine();
+                typing.BlankLine();
+                typing.CreateLine("Enter how much you would like to bet: ");
+                typing.BlankLine();
+                typing.CenterLine(String.Format("(You have {0} chips.)", myPlayer.chipTotal));
+                typing.BlankLine();
+                typing.BottomLine();
+                // Declare Bet objects that manage bets
+                Bet play1Bet = new Bet(myPlayer, thisPot);
+                Bet dealerBet = new Bet(myDealer, thisPot);
+                // Recieve bet amount and verify it is an integer
+                int betAmt = 0;
                 Console.Write("Please enter the number of chips you'd like to bet: ");
-            }
-            // Clear Console
-            Console.Clear();
-            //Display Information and pause, continuing when user presses any key
-            typing.TopLine();
-            typing.BlankLine();
-            typing.CenterLine(play1Bet.wager(betAmt));
-            typing.BlankLine();
-            typing.BottomLine();
-            typing.TopLine();
-            typing.BlankLine();
-            typing.CenterLine(dealerBet.wager(betAmt));
-            typing.BlankLine();
-            typing.BottomLine();
-            Console.Write("\t\tPress any key to continue: ");
-            Console.ReadLine();
-            // Clear Console
-            Console.Clear();
-            // Commence game
-            logic = new BlackJack(myPlayer, myDealer, myDeck);
-
-
-            if (logic.startGame(myPlayer, myDealer, myDeck) == "playerWin")
-            {
-                endScreen("playerWin");
-            }
-            else
-            {
-                playScreen("start");
-            }
+                while (!int.TryParse(Console.ReadLine(), out betAmt))
+                {
+                    Console.WriteLine("\t Input must be a valid integer");
+                    Console.Write("Please enter the number of chips you'd like to bet: ");
+                }
+                // Clear Console
+                Console.Clear();
+                //Display Information and pause, continuing when user presses any key
+                typing.TopLine();
+                typing.BlankLine();
+                typing.CenterLine(play1Bet.wager(betAmt));
+                typing.BlankLine();
+                typing.BottomLine();
+                typing.TopLine();
+                typing.BlankLine();
+                typing.CenterLine(dealerBet.wager(betAmt));
+                typing.BlankLine();
+                typing.BottomLine();
+                Console.Write("\t\tPress any key to continue: ");
+                Console.ReadLine();
+                Console.Clear();
+                // Commence game
+                logic = new BlackJack(myPlayer, myDealer, myDeck);
+                if (logic.startGame(myPlayer, myDealer, myDeck) == "playerWin")
+                {
+                    endScreen("playerWin");
+                }
+                else
+                {
+                    playScreen("start");
+                }
+                // End multiple hands logic
+            } while (playAgain());
+            
         }
 
         public void endScreen(string endCondition)
@@ -125,7 +128,7 @@ namespace DeckOfCards
                 typing.BlankLine(2);
                 typing.CenterLine("...and we don't know why...");
             }
-            typing.CreateLine(myPlayer.name+"'s Hand:");
+            typing.CreateLine(myPlayer.name + "'s Hand:");
             foreach (Card card in myPlayer.hand)
             {
                 typing.CreateLine(" - " + card.ToString());
@@ -159,7 +162,7 @@ namespace DeckOfCards
                     typing.BlankLine();
                     typing.CenterLine("Your Turn:");
                     typing.BlankLine();
-                    typing.CreateLine(player.name+"'s Cards:");
+                    typing.CreateLine(player.name + "'s Cards:");
                     foreach (Card card in player.hand)
                     {
                         typing.CreateLine(" - " + card.ToString());
@@ -194,9 +197,40 @@ namespace DeckOfCards
                         endScreen(returner);
                     }
                 } while (returner == "continue");
-                Console.ReadLine();
-
             }
+        }
+
+        public Boolean playAgain()
+        {
+            // Local variable
+            String playAgainStr = "";
+            // Repeat until input is valid option
+            do
+            {
+                Console.Write("Would you like to play again? (y/n):");
+                playAgainStr = Console.ReadLine();
+                // If player wants to play again
+                if (playAgainStr.ToLower() == "y" || playAgainStr.ToLower() == "yes")
+                {
+                    // Clear console
+                    Console.Clear();
+                    // Discard cards from each player
+                    foreach (Player current in playerList) {
+                        current.discardAll();
+                    }
+                    myDealer.discardAll();
+                    // Empty Pot
+                    thisPot.emptyPot();
+                    // Return true to play again
+                    return true;
+                }
+                // If player wnats to end program
+                else
+                {
+                    // Return false to end program
+                    return false;
+                }
+            } while (playAgainStr.ToLower() != "y" && playAgainStr.ToLower() != "yes" && playAgainStr.ToLower() != "n" && playAgainStr.ToLower() != "no");
         }
 
     }

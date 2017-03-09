@@ -49,5 +49,9 @@ namespace DeckOfCards {
         public String getTotal() {
             return Convert.ToString(this.total);
         }
+
+        public void emptyPot() {
+            total = 0;
+        }
     }
 }
