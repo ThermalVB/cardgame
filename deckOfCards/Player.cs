@@ -4,7 +4,7 @@ namespace DeckOfCards {
     public class Player {
         public string name;
         public List<Card> hand;
-        public BlackJack dealer  = new BlackJack();
+        public BlackJack dealer;
 
         public int chipTotal;
 
@@ -26,9 +26,10 @@ namespace DeckOfCards {
         // this method will make sure score will greater than 16,
         public void dealerLogic(Deck currentDeck){
                 int value = this.handValue();
-                
+                dealer = new BlackJack(this, this, currentDeck);
+
                 while(value < 16){
-                    
+
                     dealer.hit(this);
                     value = this.handValue();
                 }

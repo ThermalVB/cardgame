@@ -7,10 +7,13 @@ namespace DeckOfCards
         Player myDealer;
         Deck myDeck;
 
-        public string startGame(Player player,Player dealer,Deck deck){
+        public BlackJack(Player player,Player dealer,Deck deck) {
             myPlayer = player;
             myDealer = dealer;
             myDeck = deck;
+        }
+
+        public string startGame(Player player,Player dealer,Deck deck){
 
             for (int i = 0; i < 2; i++)
             {
@@ -40,11 +43,11 @@ namespace DeckOfCards
             myDealer.dealerLogic(myDeck);
             myDeck.Reset();
             myDeck.Shuffle();
-            if (myDealer.handValue() == 21 || (myDealer.handValue() > myPlayer.handValue())){
-                return "dealerWin";
-            }
             if (myDealer.handValue() > 21){
                 return "dealerBust";
+            }
+            else if (myDealer.handValue() == 21 || (myDealer.handValue() > myPlayer.handValue())){
+                return "dealerWin";
             }
             return "playerWin";
             }
