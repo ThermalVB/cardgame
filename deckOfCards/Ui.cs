@@ -42,9 +42,15 @@ namespace DeckOfCards
             typing.BottomLine();
             Bet play1Bet = new Bet(myPlayer, thisPot);
             int betAmt = Convert.ToInt32(typing.User_Input("Bet"));
+            Bet dealerBet = new Bet(myDealer, thisPot);
             typing.TopLine();
             typing.BlankLine();
             typing.CenterLine(play1Bet.wager(betAmt));
+            typing.BlankLine();
+            typing.BottomLine();
+            typing.TopLine();
+            typing.BlankLine();
+            typing.CenterLine(dealerBet.wager(betAmt));
             typing.BlankLine();
             typing.BottomLine();
             logic = new BlackJack(myPlayer, myDealer, myDeck);
