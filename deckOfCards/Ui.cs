@@ -41,8 +41,8 @@ namespace DeckOfCards
             typing.BlankLine();
             typing.BottomLine();
             Bet play1Bet = new Bet(myPlayer, thisPot);
-            int betAmt = Convert.ToInt32(typing.User_Input("Bet"));
             Bet dealerBet = new Bet(myDealer, thisPot);
+            int betAmt = Convert.ToInt32(typing.User_Input("Bet"));
             typing.TopLine();
             typing.BlankLine();
             typing.CenterLine(play1Bet.wager(betAmt));
