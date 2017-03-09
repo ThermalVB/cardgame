@@ -20,9 +20,11 @@ namespace DeckOfCards
         {
             resetScreen();
         }
-
         public void resetScreen()
         {
+            // Clear console from compliation data
+            Console.Clear();
+            // Top Display Box
             typing.TopLine();
             typing.BlankLine();
             typing.CenterLine("Welcome to Black Jack!");
@@ -30,9 +32,14 @@ namespace DeckOfCards
             typing.CenterLine("Please enter your name below:");
             typing.BlankLine();
             typing.BottomLine();
+            // Add player logic
             myPlayer = new Player(typing.User_Input("Name"));
             playerList.Add(myPlayer);
+            // Shuffle deck
             myDeck.Shuffle();
+            // clear Console
+            Console.Clear();
+            // Prompt for bet Amount
             typing.TopLine();
             typing.BlankLine();
             typing.CreateLine("Enter how much you would like to bet: ");
@@ -40,9 +47,19 @@ namespace DeckOfCards
             typing.CenterLine(String.Format("(You have {0} chips.)", myPlayer.chipTotal));
             typing.BlankLine();
             typing.BottomLine();
+            // Declare Bet objects that manage bets
             Bet play1Bet = new Bet(myPlayer, thisPot);
             Bet dealerBet = new Bet(myDealer, thisPot);
-            int betAmt = Convert.ToInt32(typing.User_Input("Bet"));
+            // Recieve bet amount and verify it is an integer
+            int betAmt = 0;
+            Console.Write("Please enter the number of chips you'd like to bet: ");
+            while(!int.TryParse(Console.ReadLine(), out betAmt)) {
+                Console.WriteLine("\t Input must be a valid integer");
+                Console.Write("Please enter the number of chips you'd like to bet: ");
+            }
+            // Clear Console
+            Console.Clear();
+            //Display Information and pause, continuing when user presses any key
             typing.TopLine();
             typing.BlankLine();
             typing.CenterLine(play1Bet.wager(betAmt));
@@ -53,6 +70,11 @@ namespace DeckOfCards
             typing.CenterLine(dealerBet.wager(betAmt));
             typing.BlankLine();
             typing.BottomLine();
+            Console.Write("\t\tPress any key to continue: ");
+            Console.ReadLine();
+            // Clear Console
+            Console.Clear();
+            // Commence game
             logic = new BlackJack(myPlayer, myDealer, myDeck);
 
 
@@ -95,6 +117,7 @@ namespace DeckOfCards
                 typing.CenterLine("Congratulations!");
                 typing.BlankLine(2);
                 typing.CenterLine("The Dealer busted! You win!");
+                typing.CenterLine(thisPot.credit(playerList[0]));
             }
             else
             {
@@ -145,7 +168,8 @@ namespace DeckOfCards
                     typing.CreateLine("Do you want to 'hit' or 'stay' ?");
                     typing.BottomLine();
                     move = typing.User_Input("Input");
-                    while (move != "hit" && move != "stay")
+                    // Action validation block
+                    while (move.ToLower() != "hit" && move.ToLower() != "stay")
                     {
                         typing.TopLine();
                         typing.CenterLine("Sorry, I didn't understand that. Please type it again.");
@@ -153,7 +177,9 @@ namespace DeckOfCards
                         move = typing.User_Input("Input");
                         Console.WriteLine(move);
                     }
-                    if (move == "hit")
+                    Console.Clear();
+                    // 'Hit' logic
+                    if (move.ToLower() == "hit")
                     {
                         returner = logic.hit(player);
                         if (returner == "playerWin" || returner == "playerBust")
@@ -161,13 +187,14 @@ namespace DeckOfCards
                             endScreen(returner);
                         }
                     }
-                    else if (move == "stay")
+                    // 'Stay' logic
+                    else if (move.ToLower() == "stay")
                     {
                         returner = logic.stay();
                         endScreen(returner);
                     }
-
                 } while (returner == "continue");
+                Console.ReadLine();
 
             }
         }

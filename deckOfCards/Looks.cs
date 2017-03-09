@@ -20,9 +20,10 @@ namespace DeckOfCards {
             }
         }
         public string User_Input(string input){
-            Console.WriteLine("{0}: ", input);
+            Console.Write("{0}: ", input);
             return Console.ReadLine();
         }
+
         public void CreateLine(string myLine) {            
             string tempLine = myLine;
             while(myLine.Length > width){
